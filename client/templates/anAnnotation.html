@@ -1,0 +1,32 @@
+<section class="annotation"
+  style="left: {{annotation.xPos}}%; top: {{annotation.yPos}}%" ng-class="{'open': open}">
+
+    <span class="annotation-indicator"
+      ng-click="toggleAnnotation()">
+      <span class="order">{{ annotation.order }}</span>
+    </span>
+
+    <div class="actions" ng-show="open">
+      <i class="zmdi zmdi-delete"
+        ng-click="deleteAnnotation()"
+        ></i>
+
+      <i class="close zmdi zmdi-close-circle-o"
+        ng-click="closeAnnotation()"
+        ></i>
+
+    </div>
+
+    <div class="comments" ng-show="open">
+      <ul>
+        <li ng-repeat="comment in annotation.comments">
+          <span class="comment">{{ comment.comment }}</span>
+          <span class="author">{{ comment.author.profile.name }}</span>
+          <span class="date">{{ comment.date | date:"shortDate"}}</span>
+        </li>
+      </ul>
+      <h1>New Comment:</h1>
+      <textarea ng-model="newComment"></textarea>
+      <button type="submit" ng-click="addComment(newComment, event)">submit</button>
+    </div>
+</section>

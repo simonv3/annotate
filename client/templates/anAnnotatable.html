@@ -1,0 +1,8 @@
+<img ng-src="{{ image.url() }}"
+  class="annotatable-image"
+  />
+<div class="canvas">
+  <div ng-repeat="annotation in annotations"
+    an-annotation="annotation">
+  </div>
+</div>

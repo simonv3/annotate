@@ -1,0 +1,34 @@
+<head>
+  <base href="/">
+  <title>Annotate</title>
+</head>
+
+<body ng-app="annotate" ng-controller="UploadCtrl">
+
+<div ngf-drop ngf-select
+  ngf-change="addImages($files)"
+  ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box"
+  ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'"
+  ngf-drop-available="true">
+  <div>Click here to select image</div>
+  <div>
+    <strong>OR</strong>
+  </div>
+  You can also drop image to here
+</div>
+
+<div class="images-container-title row">
+  <div class="image-container" ng-repeat="image in images">
+    <div class="actions">
+      <i ng-click="deleteImage(image)"
+        class="zmdi zmdi-delete"
+        title="Delete Image"></i>
+    </div>
+    <div an-annotatable
+      annotations="annotations"
+      an-image="image"
+      ></div>
+
+  </div>
+</div>
+</body>

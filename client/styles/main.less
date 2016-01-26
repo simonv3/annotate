@@ -1,0 +1,122 @@
+/* CSS declarations go here */
+
+@grey: grey;
+@green: green;
+@white: white;
+
+@transition-speed: .2s;
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  box-sizing: border-box;
+}
+
+.row {
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+[an-annotatable] {
+  position: relative;
+  margin: 0 auto;
+}
+
+[an-annotatable] img {
+  width: 100%;
+}
+
+.canvas {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+}
+
+.actions {
+  float: right;
+  font-size: 1.2em;
+}
+
+.annotation {
+  border-top-left-radius: 25px;
+  padding: 1rem;
+  position: absolute;
+
+  &.open {
+    background: @white;
+    box-shadow: 0px 0px 4px @grey;
+  }
+
+  .actions {
+    float: right;
+    font-size: 1em;
+
+    .zmdi-delete {
+      margin-right: .5em;
+    }
+  }
+}
+
+.annotation-indicator {
+  width: 50px;
+  position: absolute;
+  left: -25px;
+  top: -25px;
+  height: 50px;
+  display: block;
+  text-align: center;
+  line-height: 50px;
+  border-radius: 100%;
+  background-color: @grey;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0px 0px 4px @grey;
+}
+
+.comments {
+  width: 300px;
+  margin-top: 1.5em;
+
+  ul {
+    list-style: none;
+    font-size: .9em;
+    margin-bottom: .5em;
+
+    .comment {
+      display: block;
+      background-color: darken(@white, 5%);
+      padding: .5em;
+    }
+
+    .date,
+    .author {
+      font-size: .8em;
+      margin-left: .5em;
+      margin-bottom: .5em;
+      display: inline-block;
+    }
+  }
+
+  h1 {
+    font-size: .9em;
+  }
+
+  textarea {
+    font-size: .8em;
+    width: 100%;
+    display: block;
+  }
+}
+
+.drop-box {
+  padding: 3em 1em;
+  text-align: center;
+  transition: border @transition-speed;
+
+  &.dragover {
+    border: 1em solid @green;
+  }
+}
