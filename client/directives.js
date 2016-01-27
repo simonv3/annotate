@@ -1,5 +1,5 @@
 angular.module('annotate').directive('anAnnotatable',
-  function() {
+  function($timeout) {
     return {
       restrict: 'A',
       scope: {
@@ -10,6 +10,17 @@ angular.module('annotate').directive('anAnnotatable',
         var canvas = $element.children('.canvas');
 
         var image = $element.children('img');
+
+        $timeout(function() {
+          // this should not be timeout but rather
+          // image load
+          canvas.css({
+            'height': image.css('height'),
+            // 'top': image.css('top')
+          })
+
+        }, 1000)
+
 
         $scope.helpers({
           annotations: function() {
@@ -63,15 +74,37 @@ angular.module('annotate').directive('anAnnotatable',
   })
 
 angular.module('annotate').directive('anAnnotation',
-  function() {
+  function($timeout) {
     return {
       restrict: 'A',
       scope: {
         annotation: '=anAnnotation'
       },
-      controller: function($scope) {
+      controller: function($scope, $element) {
         $scope.open = false;
-        $scope.annotation.width = parseInt(angular.element('.annotation-indicator').css('width'), 10)
+        var width = parseInt(angular.element('.annotation-indicator').css('width'), 10)
+
+        var annotationElement = $element.children('.annotation')
+
+        var image = $element.parent().parent().children('img')[0];
+
+        $timeout(function() {
+          var xPosPixels = annotationElement[0].offsetLeft;
+          var yPosPixels = annotationElement[0].offsetTop;
+
+          if (xPosPixels + 320 > image.offsetWidth) { // TODO -> 320 shouldn't be hardcoded.
+            $scope.floatRight = true;
+          }
+          if (yPosPixels + 200 > image.offsetHeight) {
+            $scope.floatBottom = true;
+          }
+
+        }, 500)
+
+        // console.log(xPosPixels, yPosPixels)
+
+        // if(xPosPixels)
+
 
         $scope.toggleAnnotation = function() {
           $scope.open = !$scope.open;
