@@ -1,0 +1,27 @@
+.drop-box {
+  text-align: center;
+  transition: border @transition-speed;
+  height: 200px;
+  background-color: @upload-background;
+  border: 1em dashed @grey;
+  cursor: pointer;
+
+  .input {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: 100%;
+  }
+
+  &.empty {
+    height: 100%;
+
+    .input {
+      height: 100%;
+    }
+  }
+
+  &.dragover {
+    border: 1em solid @green;
+  }
+}

@@ -2,9 +2,15 @@
 
 @grey: grey;
 @green: green;
+@upload-background: lighten(@grey, 35%);
 @white: white;
 
+@link-hover: rgb(255, 181, 86);
+
 @transition-speed: .2s;
+
+@import "./components/annotation.import.less";
+@import "./components/drop-box.import.less";
 
 * {
   padding: 0;
@@ -13,12 +19,36 @@
   box-sizing: border-box;
 }
 
+html,body {
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  background-color: @upload-background;
+}
+
 .row {
   max-width: 1040px;
   margin: 0 auto;
 }
 
+a {
+  transition: @transition-speed color;
+
+  &:hover {
+    color: @link-hover;
+  }
+}
+
 .actions i {
+  cursor: pointer;
+  transition: @transition-speed color;
+
+  &:hover {
+    color: @link-hover;
+  }
+}
+
+.action {
   cursor: pointer;
 }
 
@@ -29,6 +59,27 @@
 
 .image-container {
   position: relative;
+  box-shadow: 0 0 4px @grey;
+  margin-top: 1em;
+
+  header {
+    background-color: darken(@upload-background, 50%);
+    padding: .25em .5em;
+    > * {
+      color: @white;
+      display: inline-block;
+      line-height: 1.6;
+    }
+
+    .actions {
+      float: right;
+      line-height: 1.3;
+    }
+
+    .editable-empty {
+      color: darken(@white, 40%);
+    }
+  }
 }
 
 [an-annotatable] {
@@ -47,95 +98,4 @@
   top: 0;
   left: 0;
   position: absolute;
-}
-
-.annotation {
-  border-top-left-radius: 25px;
-
-  position: absolute;
-
-  .content {
-    padding: 1rem;
-    background: @white;
-    box-shadow: 0px 0px 4px @grey;
-    position: absolute;
-
-    &.align-right {
-      right: 0;
-    }
-    &.align-bottom {
-      bottom: 0;
-    }
-  }
-
-  .actions {
-    float: right;
-    font-size: 1em;
-
-    .zmdi-delete {
-      margin-right: .5em;
-    }
-  }
-}
-
-.annotation-indicator {
-  width: 50px;
-  position: absolute;
-  left: -25px;
-  top: -25px;
-  height: 50px;
-  display: block;
-  text-align: center;
-  line-height: 50px;
-  border-radius: 100%;
-  background-color: @grey;
-  color: white;
-  cursor: pointer;
-  box-shadow: 0px 0px 4px @grey;
-  z-index: 1;
-}
-
-.comments {
-  width: 300px;
-  margin-top: 1.5em;
-
-  ul {
-    list-style: none;
-    font-size: .9em;
-    margin-bottom: .5em;
-
-    .comment {
-      display: block;
-      background-color: darken(@white, 5%);
-      padding: .5em;
-    }
-
-    .date,
-    .author {
-      font-size: .8em;
-      margin-left: .5em;
-      margin-bottom: .5em;
-      display: inline-block;
-    }
-  }
-
-  h1 {
-    font-size: .9em;
-  }
-
-  textarea {
-    font-size: .8em;
-    width: 100%;
-    display: block;
-  }
-}
-
-.drop-box {
-  padding: 3em 1em;
-  text-align: center;
-  transition: border @transition-speed;
-
-  &.dragover {
-    border: 1em solid @green;
-  }
 }

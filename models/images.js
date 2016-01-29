@@ -1,5 +1,4 @@
 Images = new FS.Collection("images", {
-
   stores: [
     new FS.Store.GridFS("original")
   ],
@@ -11,30 +10,26 @@ Images = new FS.Collection("images", {
   }
 });
 
+Images.allow({
+  insert: function (userId) {
+    var permissions = Meteor.users.find({_id: userId})
+      .fetch()[0].services.sandstorm.permissions;
+    return permissions.indexOf('owner') > -1 ? true : false;
+  },
 
+  remove: function (userId) {
+    var permissions = Meteor.users.find({_id: userId})
+      .fetch()[0].services.sandstorm.permissions;
+    return permissions.indexOf('owner') > -1 ? true : false;
+  },
 
-if (Meteor.isServer) {
-  Images.allow({
+  download: function (userId) {
+    return true;
+  },
 
-    insert: function (userId) {
-      return (userId ? true : false);
-    },
-
-    remove: function (userId) {
-      return (userId ? true : false);
-    },
-
-    download: function () {
-      return true;
-    },
-
-    update: function (userId) {
-      return (userId ? true : false);
-    }
-  });
-
-  Meteor.publish('images', function() {
-    return Images.find({});
-  });
-}
-
+  update: function (userId) {
+    var permissions = Meteor.users.find({_id: userId})
+      .fetch()[0].services.sandstorm.permissions;
+    return permissions.indexOf('owner') > -1 ? true : false;
+  }
+});

@@ -1,0 +1,80 @@
+.annotation {
+  border-top-left-radius: 25px;
+
+  position: absolute;
+
+  .content {
+    padding: 1rem;
+    background: @white;
+    box-shadow: 0px 0px 4px @grey;
+    position: absolute;
+
+    &.align-right {
+      right: 0;
+    }
+    &.align-bottom {
+      bottom: 0;
+    }
+  }
+
+  .actions {
+    float: right;
+    font-size: 1em;
+
+    .zmdi-delete {
+      margin-right: .5em;
+    }
+  }
+}
+
+.annotation-indicator {
+  width: 50px;
+  position: absolute;
+  left: -25px;
+  top: -25px;
+  height: 50px;
+  display: block;
+  text-align: center;
+  line-height: 50px;
+  border-radius: 100%;
+  background-color: @grey;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0px 0px 4px @grey;
+  z-index: 1;
+}
+
+.comments {
+  width: 300px;
+  margin-top: 1.5em;
+
+  ul {
+    list-style: none;
+    font-size: .9em;
+    margin-bottom: .5em;
+
+    .comment {
+      display: block;
+      background-color: darken(@white, 5%);
+      padding: .5em;
+    }
+
+    .date,
+    .author {
+      font-size: .8em;
+      margin-left: .5em;
+      margin-bottom: .5em;
+      display: inline-block;
+    }
+  }
+
+  h1 {
+    font-size: .9em;
+  }
+
+  textarea {
+    font-size: .8em;
+    width: 100%;
+    display: block;
+  }
+}
