@@ -19,9 +19,9 @@ const pkgdef :Spk.PackageDefinition = (
 
     appTitle = (defaultText = "Annotate"),
 
-    appVersion = 1,  # Increment this for every release.
+    appVersion = 2,  # Increment this for every release.
 
-    appMarketingVersion = (defaultText = "1.0.0"),
+    appMarketingVersion = (defaultText = "1.0.1"),
     # Human-readable representation of appVersion. Should match the way you
     # identify versions of your app in documentation and marketing.
 
@@ -147,6 +147,8 @@ const pkgdef :Spk.PackageDefinition = (
   # (An alternative is to automatically detect dependencies by watching what
   # the app opens while running in dev mode. To see what that looks like,
   # run `spk init` without the -A option.)
+
+  bridgeConfig = (viewInfo = (permissions = [(name = "owner")]))
 
   #bridgeConfig = (
   #  # Used for integrating permissions and roles into the Sandstorm shell
