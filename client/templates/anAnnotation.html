@@ -29,8 +29,8 @@
           </li>
         </ul>
         <h1>New Comment:</h1>
-        <textarea ng-model="newComment" ng-keyup="$event.keyCode == 13 && addComment(newComment, event)"></textarea>
-        <button type="submit" ng-click="addComment(newComment, event)">submit</button>
+        <textarea ng-model="newComment" ng-keyup="($event.keyCode == 13 && !$event.shiftKey) && addComment(newComment, $event)"></textarea>
+        <button type="submit" ng-click="addComment(newComment, $event)">submit</button>
       </div>
     </div>
 </section>

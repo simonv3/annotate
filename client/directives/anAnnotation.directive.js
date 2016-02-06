@@ -66,7 +66,8 @@ angular.module('annotate').directive('anAnnotation',
           Annotations.remove({_id: $scope.annotation._id});
         };
 
-        $scope.addComment = function() {
+        $scope.addComment = function(newComment, $event) {
+          console.log($event)
           if ($scope.newComment) {
 
             console.log(Meteor.user())
