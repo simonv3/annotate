@@ -65,6 +65,7 @@ a {
   header {
     background-color: darken(@upload-background, 50%);
     padding: .25em .5em;
+
     > * {
       color: @white;
       display: inline-block;
@@ -86,10 +87,11 @@ a {
   position: relative;
   margin: 0 auto;
   clear: both;
+  text-align: center;
 }
 
 [an-annotatable] img {
-  width: 100%;
+  max-width: 100%;
 }
 
 .canvas {

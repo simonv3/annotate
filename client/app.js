@@ -35,12 +35,18 @@ angular.module('annotate', [
   $scope.addImages = (files) => {
     console.log(files);
     if (files.length > 0) {
-      Images.insert(files[0]);
+      file = files[0];
+      file.metadata = {
+        dateAdded: new Date()
+      }
+      Images.insert(file, function(err, id) {
+        if (err) console.log(err);
+        console.log(err, id);
+      });
     }
   };
 
   $scope.updateDescription = ($data, image) => {
-    console.log('updating description', $data)
     Images.update({_id: image._id}, {$set: {'metadata.description': $data}});
   };
 }]);

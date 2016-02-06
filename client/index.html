@@ -15,15 +15,17 @@
   ng-show="user.services.sandstorm.permissions.indexOf('owner') > -1">
   <div class="input">
     <div>
-      <p>Click here to select an image</p>
-        <strong>OR</strong>
-      <p>drag an image to here from your computer</p>
+      <p>Click here to select an image
+      <strong>or</strong>
+      drag an image to here from your computer
+      </p>
     </div>
   </div>
 </div>
 
 <div class="images-container-title row">
-  <div class="image-container" ng-repeat="image in images">
+  <div class="image-container" ng-repeat="image in images | orderBy:'metadata.dateAdded'">
+
     <header>
       <div class="image-meta">
         <span href="#"
