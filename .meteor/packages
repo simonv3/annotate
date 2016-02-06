@@ -23,6 +23,7 @@ danialfarid:ng-file-upload
 less
 ixdi:material-design-iconic-font
 vitalets:angular-xeditable
+rshashkov:angular-meteor-ng-sortable
 
 kenton:accounts-sandstorm
 jacksingleton:accounts-sandstorm-dev

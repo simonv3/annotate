@@ -3,16 +3,14 @@
   <title>Annotate</title>
 </head>
 
-<body ng-app="annotate" ng-controller="UploadCtrl">
+<body ng-app="annotate"
+  ng-controller="UploadCtrl"
+  ng-show="images">
 
-<div
-  ng-class="{'empty':images.length === 0}"
-  ngf-drop ngf-select
-  ngf-change="addImages($files)"
-  ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box"
-  ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'"
-  ngf-drop-available="true"
-  ng-show="user.services.sandstorm.permissions.indexOf('owner') > -1">
+<div an-dropbox
+  ng-class="{'full-screen': images.length === 0}"
+  an-adding-images="addingImages"
+  ng-show="user.services.sandstorm.permissions.indexOf('owner') > -1 && addingImages">
   <div class="input">
     <div>
       <p>Click here to select an image
@@ -22,16 +20,48 @@
     </div>
   </div>
 </div>
+<div class="cancel-upload"
+  ng-click="addingImages = !addingImages"
+  ng-show="user.services.sandstorm.permissions.indexOf('owner') > -1 && addingImages"
+  >
+  Done!
+</div>
+
+<div class="images-preview"
+  ng-show="images.length > 0">
+  <a class="images-added"
+    ng-show="user.services.sandstorm.permissions.indexOf('owner') > -1 && !addingImages"
+    ng-click="addingImages = true">
+    + Add more images
+  </a>
+
+  <div id="sortable-container">
+    <div class="sortable-row" as-sortable="sortableOptions" ng-model="dragOrderImages">
+        <div ng-repeat="image in dragOrderImages"
+          as-sortable-item>
+            <div as-sortable-item-handle
+              ng-click="goto(image._id)"
+              class="image-placeholder"
+              style="background-image:url('{{image.url}}')">
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
 
 <div class="images-container-title row">
-  <div class="image-container" ng-repeat="image in images | orderBy:'metadata.dateAdded'">
-
+  <div class="image-container"
+    ng-repeat="image in images | orderBy: 'metadata.order'"
+    ng-class="{'adding-images': addingImages}"
+    id="{{ image._id }}">
     <header>
       <div class="image-meta">
+        {{ image.metadata.order }}
         <span href="#"
           editable-text="image.metadata.description"
           e-form="descriptionEditForm"
-          onbeforesave="updateDescription($data, image)" ng-bind="image.metadata.description || 'No description supplied'"></span>
+          onbeforesave="updateDescription($data, image)"
+          ng-bind="image.metadata.description || 'No description supplied'"></span>
         <a class="zmdi zmdi-edit action"
           ng-click="descriptionEditForm.$show()"
           ng-show="!descriptionEditForm.$visible && user.services.sandstorm.permissions.indexOf('owner') > -1"></a>
@@ -45,8 +75,8 @@
     </header>
     <div an-annotatable
       an-image="image"
+      can-annotate="!addingImages"
       ></div>
-
   </div>
 </div>
 </body>

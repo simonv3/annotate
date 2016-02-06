@@ -19,7 +19,6 @@ Annotations.allow({
   },
 
   update: function (userId, annotation) {
-    console.log(annotation)
     var permissions = Meteor.users.find({_id: userId})
       .fetch()[0].services.sandstorm.permissions;
     return true;

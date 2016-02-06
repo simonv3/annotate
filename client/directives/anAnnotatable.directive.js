@@ -3,7 +3,8 @@ angular.module('annotate').directive('anAnnotatable',
     return {
       restrict: 'A',
       scope: {
-        image: '=anImage'
+        image: '=anImage',
+        canAnnotate: '='
       },
       controller: function($scope, $attrs, $element) {
 
@@ -16,10 +17,11 @@ angular.module('annotate').directive('anAnnotatable',
           // image load
           canvas.css({
             'height': image.css('height'),
-            // 'top': image.css('top')
+          //   // 'top': image.css('top')
+            'width': image.css('width')
           })
 
-        }, 1000)
+        }, 2000)
 
 
         $scope.helpers({
@@ -33,7 +35,8 @@ angular.module('annotate').directive('anAnnotatable',
         var dragging = false;
 
         canvas.on('click', function(event) {
-          if (event.target.className === "canvas") {
+          console.log('clicking');
+          if (event.target.className.indexOf("canvas") > -1) {
 
             var xPos = event.offsetX;
             var yPos = event.offsetY;

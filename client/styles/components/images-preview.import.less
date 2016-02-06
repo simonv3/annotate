@@ -1,0 +1,110 @@
+.images-preview {
+
+  .images-added {
+    width: 124px;
+    height: 110px;
+    display: inline-block;
+    padding: 31px 0;
+    vertical-align: top;
+    text-align: center;
+    color: @grey;
+    cursor: pointer;
+    border: 2px dashed darken(@upload-background, 10%);
+    background-color: @upload-background;
+  }
+
+  li {
+    display: inline-block;
+  }
+
+  .image-placeholder {
+    background-position: center center;
+    height: 100%;
+    width: 100%;
+    display: inline-block;
+    background-size: cover;
+    background-repeat: no-repeat;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    -webkit-user-drag: none;
+    user-drag: none;
+  }
+
+  #sortable-container {
+    display: inline-block;
+  }
+
+  .as-sortable-item,
+  .as-sortable-placeholder {
+      display: inline-block;
+      width: 124px;
+      height: 110px;
+      float: left;
+  }
+}
+
+.as-sortable-item {
+    -ms-touch-action: none;
+    touch-action: none;
+}
+
+.as-sortable-item-handle {
+    cursor: move;
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+}
+
+.as-sortable-placeholder {
+}
+
+.as-sortable-drag {
+    position: absolute;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.as-sortable-hidden {
+    display: none !important;
+}
+
+.as-sortable-un-selectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    -webkit-user-drag: none;
+    user-drag: none;
+}
+
+.as-sortable-item, .as-sortable-placeholder {
+    min-height: 20px;
+    margin: 1px 2px 5px 1px;
+}
+
+.as-sortable-item {
+    background-color: @white;
+}
+
+.as-sortable-item-handle {
+}
+
+.as-sortable-placeholder {
+    border: 1px dashed darkgrey;
+    box-sizing: border-box;
+    background-color: @upload-background;
+}
+
+.as-sortable-drag {
+    opacity: .8;
+}
+
+.as-sortable-hidden {
+}

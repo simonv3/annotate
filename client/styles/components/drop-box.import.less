@@ -1,9 +1,17 @@
+[an-dropbox].full-screen {
+  height: 100%;
+}
+
+[an-dropbox] {
+  height: 74%;
+}
+
 .drop-box {
   text-align: center;
   transition: border @transition-speed;
-  height: 100px;
+  height: 100%;
   background-color: @upload-background;
-  border: 1em dashed @grey;
+  border: .5em dashed @grey;
   cursor: pointer;
 
   .input {
@@ -13,15 +21,20 @@
     height: 100%;
   }
 
-  &.empty {
-    height: 100%;
-
-    .input {
-      height: 100%;
-    }
-  }
-
   &.dragover {
     border: 1em solid @green;
+  }
+}
+
+.cancel-upload {
+  padding: 1rem;
+  background-color: @link-hover;
+  text-align: center;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color @transition-speed;
+
+  &:hover {
+    background-color: darken(@link-hover, 10%);
   }
 }
