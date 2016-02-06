@@ -49,14 +49,32 @@ angular.module('annotate').directive('anAnnotatable',
                 xPos: xPosPercent,
                 image: $scope.image._id,
                 yPos: yPosPercent,
-                order: $scope.annotations.length + 1,
+                date: new Date(),
                 comments: []
+              }, function(err, annotationId) {
+                if (err) console.log(err);
+                console.log(annotationId);
+                $scope.annotations.forEach(function(annotation) {
+                  if (annotation._id === annotationId) {
+                    annotation.open = true;
+                  }
+                })
               })
             })
           }
 
           // and then now add more things to the annotation
         });
+
+        $scope.annotationOpened = function(annotationId) {
+          $scope.annotations.forEach(function(annotation) {
+            if (annotation._id === annotationId) {
+              annotation.top = true;
+            } else {
+              annotation.top = false;
+            }
+          })
+        }
 
         // Future functionality: drag overlay boxes
         // $element.on('mousedown', function(event) {

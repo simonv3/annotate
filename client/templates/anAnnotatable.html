@@ -3,6 +3,8 @@
   />
 <div class="canvas">
   <div ng-repeat="annotation in annotations"
-    an-annotation="annotation">
+    an-annotation="annotation"
+    annotation-opened="annotationOpened(annotationId)"
+    an-index="$index">
   </div>
 </div>

@@ -1,9 +1,10 @@
 <section class="annotation"
+  ng-class="{'top': annotation.top}"
   style="left: {{annotation.xPos}}%; top: {{annotation.yPos}}%">
 
     <span class="annotation-indicator"
       ng-click="toggleAnnotation()">
-      <span class="order">{{ annotation.order }}</span>
+      <span class="order">{{ index + 1 }}</span>
     </span>
 
     <div class="content" ng-show="open" ng-class="{ 'align-right': floatRight, 'align-bottom': floatBottom }">
@@ -28,7 +29,7 @@
           </li>
         </ul>
         <h1>New Comment:</h1>
-        <textarea ng-model="newComment"></textarea>
+        <textarea ng-model="newComment" ng-keyup="$event.keyCode == 13 && addComment(newComment, event)"></textarea>
         <button type="submit" ng-click="addComment(newComment, event)">submit</button>
       </div>
     </div>
