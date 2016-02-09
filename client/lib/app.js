@@ -1,11 +1,3 @@
-// Meteor.subscribe('images', function() {
-//   return Images.find({}, {'sort': {'metadata.order': 1}});
-// });
-
-// Meteor.subscribe('annotations', function() {
-//   return Annotations.find({});
-// });
-
 
 angular.module('annotate', [
   'angular-meteor',

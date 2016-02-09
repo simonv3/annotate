@@ -34,7 +34,7 @@ angular.module('annotate').directive('anAnnotatable',
 
         $scope.helpers({
           annotations: function() {
-            return Annotations.find({image: $scope.image._id});
+            return Annotations.find({image: $scope.image._id}, {'sort': {'date': 1}});
           }
         })
 
@@ -55,12 +55,13 @@ angular.module('annotate').directive('anAnnotatable',
             var yPosPercent = yPos / height * 100
 
             $scope.$apply(function() {
-
+              console.log(Meteor.userId())
               Annotations.insert({
                 xPos: xPosPercent,
                 image: $scope.image._id,
                 yPos: yPosPercent,
                 date: new Date(),
+                owner: Meteor.userId(),
                 comments: []
               }, function(err, annotationId) {
                 if (err) console.log(err);

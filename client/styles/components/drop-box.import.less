@@ -40,6 +40,7 @@
 .cancel-upload {
   padding: 1rem;
   background-color: @link-hover;
+  box-shadow: 0 0 4px darken(@link-hover, 30%) inset;
   text-align: center;
   width: 100%;
   cursor: pointer;
@@ -48,4 +49,9 @@
   &:hover {
     background-color: darken(@link-hover, 10%);
   }
+
+  &:focus,
+    &:active {
+      background-color: darken(@link-hover, 20%);
+    }
 }

@@ -1,5 +1,9 @@
 .images-preview {
 
+  background-color: darken(@grey, 20%);
+  padding: 1rem;
+  box-shadow: 0 0 4px darken(@grey, 50%) inset;
+
   .images-added {
     width: 124px;
     height: 110px;
@@ -7,10 +11,21 @@
     padding: 31px 0;
     vertical-align: top;
     text-align: center;
-    color: @grey;
+    color: @white;
     cursor: pointer;
-    border: 2px dashed darken(@upload-background, 10%);
-    background-color: @upload-background;
+    border: 2px dashed darken(@grey, 45%);
+    background-color: darken(@grey, 15%);
+
+    transition: background-color @transition-speed;
+
+    &:hover {
+      background-color: darken(@grey, 5%);
+    }
+
+    &:focus,
+    &:active {
+      background-color: lighten(@grey, 5%);
+    }
   }
 
   li {
@@ -45,6 +60,7 @@
       width: 124px;
       height: 110px;
       float: left;
+      margin-bottom: 0;
   }
 }
 

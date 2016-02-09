@@ -9,11 +9,11 @@ Annotations.allow({
     // return (userId ? true : false);
   },
 
-  remove: function (userId) {
+  remove: function (userId, annotation) {
     var permissions = Meteor.users.find({_id: userId})
       .fetch()[0].services.sandstorm.permissions;
-
-    if (permissions.indexOf('owner') > -1)
+    console.log(annotation.owner, userId, annotation.owner === userId);
+    if (permissions.indexOf('owner') > -1 || userId === annotation.owner)
       return true;
     return false;
   },
