@@ -9,19 +9,27 @@ angular.module('annotate').directive('anAnnotatable',
       controller: function($scope, $attrs, $element) {
 
         var canvas = $element.children('.canvas');
-
         var image = $element.children('img');
+
+        var recalcHeightAndWidth = function() {
+          var height = image.css('height');
+          var width = image.css('width');
+          canvas.css({
+            'height': height,
+          //   // 'top': image.css('top')
+            'width': width
+          });
+        }
 
         $timeout(function() {
           // this should not be timeout but rather
           // image load
-          canvas.css({
-            'height': image.css('height'),
-          //   // 'top': image.css('top')
-            'width': image.css('width')
-          })
+          recalcHeightAndWidth()
+        }, 2000);
 
-        }, 2000)
+        $scope.$watch('canAnnotate', function() {
+          recalcHeightAndWidth()
+        })
 
 
         $scope.helpers({
@@ -35,7 +43,6 @@ angular.module('annotate').directive('anAnnotatable',
         var dragging = false;
 
         canvas.on('click', function(event) {
-          console.log('clicking');
           if (event.target.className.indexOf("canvas") > -1) {
 
             var xPos = event.offsetX;
@@ -48,6 +55,7 @@ angular.module('annotate').directive('anAnnotatable',
             var yPosPercent = yPos / height * 100
 
             $scope.$apply(function() {
+
               Annotations.insert({
                 xPos: xPosPercent,
                 image: $scope.image._id,
@@ -56,7 +64,7 @@ angular.module('annotate').directive('anAnnotatable',
                 comments: []
               }, function(err, annotationId) {
                 if (err) console.log(err);
-                console.log(annotationId);
+
                 $scope.annotations.forEach(function(annotation) {
                   if (annotation._id === annotationId) {
                     annotation.open = true;

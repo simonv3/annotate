@@ -3,8 +3,10 @@
   style="left: {{annotation.xPos}}%; top: {{annotation.yPos}}%">
 
     <span class="annotation-indicator"
+      ng-class="{'loading': loading}"
       ng-click="toggleAnnotation()">
-      <span class="order">{{ index + 1 }}</span>
+      <span class="order" ng-show="!loading">{{ index + 1 }}</span>
+      <i class="zmdi zmdi-replay zmdi-hc-spin" ng-show="loading"></i>
     </span>
 
     <div class="content" ng-show="open" ng-class="{ 'align-right': floatRight }">

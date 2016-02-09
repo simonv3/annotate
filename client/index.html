@@ -8,9 +8,10 @@
   ng-show="images">
 
 <div an-dropbox
-  ng-class="{'full-screen': images.length === 0}"
+  ng-class="{'full-screen': images.length === 0, 'no-height': !addingImages}"
   an-adding-images="addingImages"
-  ng-show="user.services.sandstorm.permissions.indexOf('owner') > -1 && addingImages">
+  ng-show="user.services.sandstorm.permissions.indexOf('owner') > -1 && !loading"
+  ng-cloak>
   <div class="input">
     <div>
       <p>Click here to select an image
@@ -22,9 +23,9 @@
 </div>
 <div class="cancel-upload"
   ng-click="addingImages = !addingImages"
-  ng-show="user.services.sandstorm.permissions.indexOf('owner') > -1 && addingImages"
+  ng-show="user.services.sandstorm.permissions.indexOf('owner') > -1 && addingImages && !loading"
   >
-  Done!
+  Done uploading images!
 </div>
 
 <div class="images-preview"

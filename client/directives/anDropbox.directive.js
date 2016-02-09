@@ -7,6 +7,7 @@ angular.module('annotate').directive('anDropbox',
         addingImages: '=anAddingImages'
       },
       controller: function($scope, $attrs, $element) {
+
         $scope.addImages = (files) => {
           if (files.length > 0) {
             file = files[0];

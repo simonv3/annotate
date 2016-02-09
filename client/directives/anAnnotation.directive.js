@@ -8,6 +8,9 @@ angular.module('annotate').directive('anAnnotation',
         index: '=anIndex'
       },
       controller: function($scope, $element) {
+
+        $scope.loading = false;
+
         $scope.open = false;
 
         $scope.$watch('annotation.open', function(open) {
@@ -19,7 +22,6 @@ angular.module('annotate').directive('anAnnotation',
           if ($scope.annotation) {
             $scope.annotationOpened({ annotationId: $scope.annotation._id });
           }
-
         });
 
         var width = parseInt(angular.element('.annotation-indicator').css('width'), 10)
@@ -58,6 +60,9 @@ angular.module('annotate').directive('anAnnotation',
         };
 
         $scope.setAnnotationOpenState = function(set) {
+          if (set === true) {
+            $scope.loading = false;
+          }
           $scope.open = set;
           $scope.annotation.open = set;
         }

@@ -1,10 +1,10 @@
-Meteor.subscribe('images', function() {
-  return Images.find({}, {'sort': {'metadata.order': 1}});
-});
+// Meteor.subscribe('images', function() {
+//   return Images.find({}, {'sort': {'metadata.order': 1}});
+// });
 
-Meteor.subscribe('annotations', function() {
-  return Annotations.find({});
-});
+// Meteor.subscribe('annotations', function() {
+//   return Annotations.find({});
+// });
 
 
 angular.module('annotate', [
@@ -15,9 +15,14 @@ angular.module('annotate', [
   ])
 .controller('UploadCtrl', function ($scope, $timeout, $location, $anchorScroll) {
 
+  $scope.loading = true;
+
+  $scope.subscribe('images')
+  $scope.subscribe('annotations')
+
   $scope.helpers({
     images: function() {
-      return Images.find({});
+      return Images.find({}, {'sort': {'metadata.order': 1}});
     },
     user: function() {
       return Meteor.user();
@@ -28,12 +33,14 @@ angular.module('annotate', [
 
   $scope.$watch('images.length', function() {
 
-    if ($scope.images.length === 0) {
-      $scope.addingImages = true;
-    }
+    $timeout(function() {
+      if ($scope.images.length === 0) {
+        $scope.addingImages = true;
+      }
+      $scope.loading = false;
+    }, 2000)
 
     if ($scope.images) {
-      $scope.loading = true;
       // Give it some time to process the image
       // being added. Possibly do this in a callback
       // instead?
@@ -69,7 +76,6 @@ angular.module('annotate', [
   };
 
   $scope.goto = function(location) {
-    console.log(location);
     $location.hash(location);
     $anchorScroll;
   }
@@ -79,7 +85,6 @@ angular.module('annotate', [
       return image._id
     });
     for (var i = 0; i < ids.length; i++) {
-      console.log(i, ids[i]);
       Images.update({_id: ids[i]},
                   {$set: {'metadata.order': i}},
                   { upsert: false, multi: true })

@@ -2,8 +2,19 @@
   height: 100%;
 }
 
+[an-dropbox].no-height{
+  height: 0%;
+  opacity: 0;
+
+  .drop-box {
+    padding: 0;
+    border: 0;
+  }
+}
+
 [an-dropbox] {
   height: 74%;
+  transition: height @transition-speed, opacity @transition-speed;
 }
 
 .drop-box {
