@@ -10,6 +10,7 @@
 <div an-dropbox
   ng-class="{'full-screen': images.length === 0, 'no-height': !addingImages}"
   an-adding-images="addingImages"
+  an-on-image-added="mapDragOrderImages"
   ng-show="user.services.sandstorm.permissions.indexOf('owner') > -1 && !loading"
   ng-cloak>
   <div class="input">
@@ -25,7 +26,7 @@
   ng-click="addingImages = !addingImages"
   ng-show="user.services.sandstorm.permissions.indexOf('owner') > -1 && addingImages && !loading"
   >
-  Done uploading images!
+  I'm done uploading images!
 </div>
 
 <div class="images-preview"
@@ -38,8 +39,9 @@
 
   <div id="sortable-container">
     <div class="sortable-row" as-sortable="sortableOptions" ng-model="dragOrderImages">
-        <div ng-repeat="image in dragOrderImages"
+        <div ng-repeat="image in dragOrderImages track by image._id"
           as-sortable-item>
+
             <div as-sortable-item-handle
               ng-click="goto(image._id)"
               class="image-placeholder"

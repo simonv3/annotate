@@ -16,7 +16,6 @@ angular.module('annotate').directive('anAnnotatable',
           var width = image.css('width');
           canvas.css({
             'height': height,
-          //   // 'top': image.css('top')
             'width': width
           });
         }

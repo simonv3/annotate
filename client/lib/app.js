@@ -37,13 +37,7 @@ angular.module('annotate', [
       // being added. Possibly do this in a callback
       // instead?
       $timeout(function() {
-        $scope.dragOrderImages = $scope.images.map(function(image) {
-          return {
-            url: image.url(),
-            _id: image._id,
-            metadata: image.metadata
-          };
-        });
+        $scope.mapDragOrderImages();
         $scope.dragOrderImages = $scope.dragOrderImages.sort(function(a, b) {
           if (a.metadata && b.metadata) {
             return a.metadata.order - b.metadata.order;
@@ -60,10 +54,37 @@ angular.module('annotate', [
     }
   });
 
+  // this is a bit of hack eh.
+  // basically this function checks that url() of
+  // an image isn't null, and then adds it to the array
+  // if it is, try again 2 seconds later!
+  $scope.mapDragOrderImages = function() {
+
+    $scope.dragOrderImages = $scope.images.map(function(image) {
+      if (!image.url()) {
+        // wait 2 seconds and try again
+        $timeout(function() {
+          $scope.mapDragOrderImages();
+        }, 2000)
+
+      } else {
+        return {
+          url: image.url(),
+          _id: image._id,
+          metadata: image.metadata
+        };
+      }
+    });
+  }
+
   $scope.deleteImage = (image) => {
     var confirmed = confirm('Are you sure?');
     if (confirmed) {
-      Images.remove(image._id);
+      Images.remove(image._id, function() {
+        if ($scope.images.length === 0) {
+          $scope.addingImages = true;
+        }
+      });
     }
   };
 
