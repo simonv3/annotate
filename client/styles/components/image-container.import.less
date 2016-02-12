@@ -1,0 +1,31 @@
+.image-container {
+  position: relative;
+  box-shadow: 0 0 4px @shadow-color;
+  margin-top: 1em;
+  background-color: @upload-background;
+
+  &.adding-images {
+    pointer-events: none;
+    opacity: .5;
+  }
+
+  header {
+    background-color: darken(@header-color, 50%);
+    padding: .25em .5em;
+
+    > * {
+      color: @white;
+      display: inline-block;
+      line-height: 1.6;
+    }
+
+    .actions {
+      float: right;
+      line-height: 1.3;
+    }
+
+    .editable-empty {
+      color: darken(@white, 40%);
+    }
+  }
+}

@@ -48,35 +48,24 @@ const pkgdef :Spk.PackageDefinition = (
       # https://github.com/sandstorm-io/sandstorm/blob/master/src/sandstorm/package.capnp
       icons = (
         # Various icons to represent the app in various contexts.
-        #appGrid = (svg = embed "path/to/appgrid-128x128.svg"),
-        #grain = (svg = embed "path/to/grain-24x24.svg"),
-        #market = (svg = embed "path/to/market-150x150.svg"),
-        #marketBig = (svg = embed "path/to/market-big-300x300.svg"),
+        appGrid = (svg = embed "../app-icons/appGrid.svg"),
+        grain = (svg = embed "../app-icons/grain.svg"),
+        market = (svg = embed "../app-icons/market.svg"),
+        marketBig = (svg = embed "../app-icons/market.svg"),
       ),
 
       website = "https://github.com/simonv3/annotate/",
-      # This should be the app's main website url.
 
       codeUrl = "https://github.com/simonv3/annotate/",
-      # URL of the app's source code repository, e.g. a GitHub URL.
-      # Required if you specify a license requiring redistributing code, but optional otherwise.
 
       license = (openSource = mit),
-      # The license this package is distributed under.  See
-      # https://docs.sandstorm.io/en/latest/developing/publishing-apps/#license
 
-      categories = [],
-      # A list of categories/genres to which this app belongs, sorted with best fit first.
-      # See the list of categories at
+      categories = [graphics,],
       # https://docs.sandstorm.io/en/latest/developing/publishing-apps/#categories
 
       author = (
-        # Fields relating to the author of this app.
 
         contactEmail = "simon@vansintjan.net",
-        # Email address to contact for any issues with this app. This includes end-user support
-        # requests as well as app store administrator requests, so it is very important that this be a
-        # valid address with someone paying attention to it.
 
         pgpSignature = embed "../pgp-signature",
         # PGP signature attesting responsibility for the app ID. This is a binary-format detached

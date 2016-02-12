@@ -1,8 +1,8 @@
 .images-preview {
 
-  background-color: darken(@grey, 20%);
+  background-color: darken(@preview-strip-background, 20%);
   padding: 1rem;
-  box-shadow: 0 0 4px darken(@grey, 50%) inset;
+  box-shadow: 0 0 4px darken(@preview-strip-background, 50%) inset;
 
   .images-added {
     width: 124px;
@@ -13,18 +13,18 @@
     text-align: center;
     color: @white;
     cursor: pointer;
-    border: 2px dashed darken(@grey, 45%);
-    background-color: darken(@grey, 15%);
+    border: 2px dashed darken(@preview-strip-background, 45%);
+    background-color: darken(@preview-strip-background, 15%);
 
     transition: background-color @transition-speed;
 
     &:hover {
-      background-color: darken(@grey, 5%);
+      background-color: darken(@preview-strip-background, 5%);
     }
 
     &:focus,
     &:active {
-      background-color: lighten(@grey, 5%);
+      background-color: lighten(@preview-strip-background, 5%);
     }
   }
 

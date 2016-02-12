@@ -4,11 +4,26 @@
 @green: green;
 @upload-background: lighten(@grey, 35%);
 @white: white;
+@light-blue: #308194;
+@dark-blue: #1C2B67;
 
-@link-hover: rgb(255, 181, 86);
+@preview-strip-background: @dark-blue;
+@drop-box-color: lighten(@light-blue, 50%);
+
+@link-color: @light-blue;
+@link-hover: @link-color;
+@link-text: @white;
+
+@shadow-color: @dark-blue;
+
+@header-color: @dark-blue;
+
+@annotation-color: @link-color;
+@annotation-shadow-color: @shadow-color;
 
 @transition-speed: .2s;
 
+@import "./components/image-container.import.less";
 @import "./components/annotatable.import.less";
 @import "./components/annotation.import.less";
 @import "./components/drop-box.import.less";
@@ -57,36 +72,4 @@ a {
 .actions {
   text-align: right;
   font-size: 1.2em;
-}
-
-.image-container {
-  position: relative;
-  box-shadow: 0 0 4px @grey;
-  margin-top: 1em;
-  background-color: @upload-background;
-
-  &.adding-images {
-    pointer-events: none;
-    opacity: .5;
-  }
-
-  header {
-    background-color: darken(@upload-background, 50%);
-    padding: .25em .5em;
-
-    > * {
-      color: @white;
-      display: inline-block;
-      line-height: 1.6;
-    }
-
-    .actions {
-      float: right;
-      line-height: 1.3;
-    }
-
-    .editable-empty {
-      color: darken(@white, 40%);
-    }
-  }
 }
