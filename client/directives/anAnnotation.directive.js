@@ -1,3 +1,5 @@
+/* global angular, Projects */
+
 angular.module('annotate').directive('anAnnotation',
   function($timeout) {
     return {

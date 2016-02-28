@@ -10,6 +10,7 @@ angular.module('annotate', [
   $scope.loading = true;
 
   $scope.subscribe('images')
+  $scope.subscribe('projects')
   $scope.subscribe('annotations')
 
   $scope.helpers({

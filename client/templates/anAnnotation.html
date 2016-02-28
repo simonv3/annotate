@@ -5,7 +5,7 @@
     <span class="annotation-indicator"
       ng-class="{'loading': loading}"
       ng-click="toggleAnnotation()">
-      <span class="order" ng-show="!loading">{{ index + 1 }}</span>
+      <span class="order" ng-show="!loading">{{ annotation.number }}</span>
       <i class="zmdi zmdi-replay zmdi-hc-spin" ng-show="loading"></i>
     </span>
 
