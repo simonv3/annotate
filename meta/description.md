@@ -1,1 +1,1 @@
-Annotate images on Sandstorm
+Annotate lets you upload and annotate multiple images to easily share them with your team mates and colleagues. You can comment on specific parts of images and have conversations directly in the images.
