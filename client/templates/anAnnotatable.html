@@ -9,4 +9,17 @@
     annotation-opened="annotationOpened(annotationId)"
     an-index="$index">
   </div>
+  <div class="add-annotation"
+    ng-show="addAnnotationPopup.show"
+    style="top: {{ addAnnotationPopup.y }}%; left: {{ addAnnotationPopup.x }}%">
+    Add an annotation?
+    <button class="pill"
+      ng-click="confirmed(addAnnotationPopup)">
+      Yes
+    </button>
+    <button class="pill"
+      ng-click="closePopup(addAnnotationPopup)">
+      No
+    </button>
+  </div>
 </div>

@@ -10,6 +10,12 @@ angular.module('annotate').directive('anAnnotatable',
         showAnnotations: '='
       },
       controller: function ($scope, $attrs, $element) {
+
+        $scope.addAnnotationPopup = {
+          show: false,
+          x: null,
+          y: null,
+        }
         var canvas = $element.children('.canvas')
         var image = $element.children('img')
 
@@ -51,7 +57,13 @@ angular.module('annotate').directive('anAnnotatable',
         image.draggable = false
 
         canvas.on('click', function (event) {
+
+          $scope.annotations.forEach(function (annotation) {
+            annotation.open = false;
+          })
+
           if (event.target.className.indexOf('canvas') > -1) {
+
             var xPos = event.offsetX
             var yPos = event.offsetY
 
@@ -62,31 +74,51 @@ angular.module('annotate').directive('anAnnotatable',
             var yPosPercent = yPos / height * 100
 
             $scope.$apply(function () {
-              Meteor.call('incrementAnnotations', function (err, next) {
-                if (err) console.log(err)
-                Annotations.insert({
-                  image: $scope.image._id,
-                  xPos: xPosPercent,
-                  yPos: yPosPercent,
-                  date: new Date(),
-                  owner: Meteor.userId(),
-                  number: next,
-                  comments: []
-                }, function (err, annotationId) {
-                  if (err) console.log(err)
-
-                  $scope.annotations.forEach(function (annotation) {
-                    if (annotation._id === annotationId) {
-                      annotation.open = true
-                    }
-                  })
-                })
-                console.log('post-increment', next)
-              })
+              $scope.addAnnotationPopup.show = true;
+              $scope.addAnnotationPopup.x = xPosPercent;
+              $scope.addAnnotationPopup.y = yPosPercent;
             })
+            //
           }
           // and then now add more things to the annotation
         })
+
+        $scope.confirmed = function (obj) {
+          newAnnotation(obj.x, obj.y)
+          $scope.closePopup (obj)
+        }
+
+        $scope.closePopup = function (obj) {
+          obj.x = null
+          obj.y = null
+          obj.show = false
+        }
+
+        var newAnnotation = function (xPosPercent, yPosPercent) {
+          // $scope.$apply(function () {
+            Meteor.call('incrementAnnotations', function (err, next) {
+              if (err) console.log(err)
+              Annotations.insert({
+                image: $scope.image._id,
+                xPos: xPosPercent,
+                yPos: yPosPercent,
+                date: new Date(),
+                owner: Meteor.userId(),
+                number: next,
+                comments: []
+              }, function (err, annotationId) {
+                if (err) console.log(err)
+
+                $scope.annotations.forEach(function (annotation) {
+                  if (annotation._id === annotationId) {
+                    annotation.open = true
+                  }
+                })
+              })
+              console.log('post-increment', next)
+            })
+          // })
+        }
 
         $scope.annotationOpened = function (annotationId) {
           $scope.annotations.forEach(function (annotation) {

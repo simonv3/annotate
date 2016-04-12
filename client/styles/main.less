@@ -74,13 +74,14 @@ a {
   font-size: 1.2em;
 }
 
-.tab {
+.pill {
   background-color: @link-color;
   color: @link-text;
   padding: .25rem .5rem;
-  border-radius: 6px;
+  border-radius: 4px;
   display: inline-block;
   cursor: pointer;
+  border: 1px solid darken(@link-color, 5%);
 
   &:hover {
     background-color: darken(@link-color, 10%);
