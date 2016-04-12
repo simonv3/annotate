@@ -52,11 +52,16 @@
   </div>
 </div>
 
+<div class="toggle-view row">
+
+</div>
+
 <div class="images-container-title row">
   <div class="image-container"
     ng-repeat="image in images | orderBy: 'metadata.order'"
     ng-class="{'adding-images': addingImages}"
     id="{{ image._id }}">
+
     <header>
       <div class="image-meta">
         {{ image.metadata.order + 1 }}.
@@ -64,14 +69,15 @@
           editable-text="image.metadata.description"
           e-form="descriptionEditForm"
           onbeforesave="updateDescription($data, image)"
-          ng-bind="image.metadata.description || 'No description supplied'"></span>
+          ng-bind="image.metadata.description  || 'No description supplied'"></span>
         <a class="zmdi zmdi-edit action"
           ng-click="descriptionEditForm.$show()"
           ng-show="!descriptionEditForm.$visible && user.services.sandstorm.permissions.indexOf('owner') > -1"></a>
       </div>
 
-      <div class="actions" ng-show="user.services.sandstorm.permissions.indexOf('owner') > -1">
-        <i ng-click="deleteImage(image)"
+      <div class="actions">
+        <i ng-show="user.services.sandstorm.permissions.indexOf('owner') > -1"
+          ng-click="deleteImage(image)"
           class="zmdi zmdi-delete action"
           title="Delete Image"></i>
       </div>
@@ -80,6 +86,10 @@
       an-image="image"
       can-annotate="!addingImages"
       ></div>
+    <footer>
+      <span class="has-older" ng-show="image.metadata.previous">Has an older version.</span>
+      <span class="uploaded-by">Uploaded by <span ng-bind="user.services.sandstorm.preferredHandle">.</span>
+    </footer>
   </div>
 </div>
 </body>

@@ -2,6 +2,7 @@
   position: relative;
   box-shadow: 0 0 4px @shadow-color;
   margin-top: 1em;
+  margin-bottom: 1em;
   background-color: @upload-background;
 
   &.adding-images {
@@ -26,6 +27,14 @@
 
     .editable-empty {
       color: darken(@white, 40%);
+    }
+  }
+
+  footer {
+    padding: .25rem .5rem;
+
+    .uploaded-by {
+      float: right;
     }
   }
 }

@@ -15,7 +15,7 @@ angular.module('annotate', [
 
   $scope.helpers({
     images: function() {
-      return Images.find({}, {'sort': {'metadata.order': 1}});
+      return Images.find({'metadata.next': undefined}, {'sort': {'metadata.order': 1}});
     },
     user: function() {
       return Meteor.user();
@@ -51,7 +51,6 @@ angular.module('annotate', [
           }
         });
       }, 1000)
-
     }
   });
 

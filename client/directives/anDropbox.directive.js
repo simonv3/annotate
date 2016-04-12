@@ -12,9 +12,33 @@ angular.module('annotate').directive('anDropbox',
         $scope.addImages = (files) => {
           if (files.length > 0) {
             files.forEach(function(file) {
-              Images.insert(file, function(err, id) {
-                if (err) console.log(err);
-                console.log($scope.onImageAdded)
+
+              // When uploading a file, let's first see if we can find the
+              // same file previously
+
+              var existingImages = Images.find(
+                {'original.name': file.name},
+                {'sort': {'uploadedAt': -1}}
+              ).fetch()
+
+              Images.insert(file, function(err, newFile) {
+                if (err) console.log('error insterting image', err);
+
+                if (existingImages.length > 0) {
+                  existingImages.forEach(function(img) {
+                  Images.update({_id: img._id},
+                        {$set: {'metadata.newest': newFile._id}})
+                  })
+                  Images.update({_id: existingImages[0]._id},
+                    {$set: {'metadata.next': newFile._id}})
+                  Images.update({_id: newFile._id},
+                    {$set: {
+                      'metadata.previous': existingImages[0]._id,
+                      'metadata.description': existingImages[0].metadata.description,
+                      'metadata.order': existingImages[0].metadata.order
+                    }})
+                }
+
                 $scope.$apply(function() {
                   $timeout(function() {
                     $scope.onImageAdded();
