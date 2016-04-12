@@ -1,18 +1,20 @@
 /* global angular, Annotations, Meteor */
 
 angular.module('annotate').directive('anAnnotatable',
-  function ($timeout) {
+  function ($timeout, $interval) {
     return {
       restrict: 'A',
       scope: {
         image: '=anImage',
-        canAnnotate: '='
+        canAnnotate: '=',
+        showAnnotations: '='
       },
       controller: function ($scope, $attrs, $element) {
         var canvas = $element.children('.canvas')
         var image = $element.children('img')
 
         var recalcHeightAndWidth = function () {
+          var image = $element.children('img')
           var height = image.css('height')
           var width = image.css('width')
           canvas.css({
@@ -21,15 +23,24 @@ angular.module('annotate').directive('anAnnotatable',
           })
         }
 
-        $timeout(function () {
+        $interval(function () {
           // this should not be timeout but rather
-          // image load
+          // image load. This will probably make some browsers
+          // upset
           recalcHeightAndWidth()
-        }, 2000)
+        }, 500)
 
-        $scope.$watch('canAnnotate', function () {
-          recalcHeightAndWidth()
-        })
+        // $scope.$watch('showAnnotations', function (aft, bef) {
+        //   if (aft) {
+        //     $timeout(function () {
+        //       recalcHeightAndWidth()
+        //     }, 100)
+        //   }
+        // })
+
+        // $scope.$watch('canAnnotate', function () {
+        //   recalcHeightAndWidth()
+        // })
 
         $scope.helpers({
           annotations: function () {

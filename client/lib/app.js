@@ -8,6 +8,7 @@ angular.module('annotate', [
 .controller('UploadCtrl', function ($scope, $timeout, $location, $anchorScroll) {
 
   $scope.loading = true;
+  $scope.view = 'single';
 
   $scope.subscribe('images')
   $scope.subscribe('projects')

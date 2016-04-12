@@ -53,10 +53,16 @@
 </div>
 
 <div class="toggle-view row">
-
+  <a class="tab"
+    ng-class="{'selected': view === 'single'}"
+    ng-click="view = 'single'">1 column</a>
+  <a class="tab"
+    ng-class="{'selected': view === 'double'}"
+    ng-click="view = 'double'">2 columns</a>
 </div>
 
-<div class="images-container-title row">
+<div class="images-container-title row"
+  ng-class="{'double': view === 'double'}">
   <div class="image-container"
     ng-repeat="image in images | orderBy: 'metadata.order'"
     ng-class="{'adding-images': addingImages}"
@@ -84,7 +90,8 @@
     </header>
     <div an-annotatable
       an-image="image"
-      can-annotate="!addingImages"
+      show-annotations="view === 'single'"
+      can-annotate="!addingImages && view === 'single'"
       ></div>
     <footer>
       <span class="has-older" ng-show="image.metadata.previous">Has an older version.</span>

@@ -73,3 +73,27 @@ a {
   text-align: right;
   font-size: 1.2em;
 }
+
+.tab {
+  background-color: @link-color;
+  color: @link-text;
+  padding: .25rem .5rem;
+  border-radius: 6px;
+  display: inline-block;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken(@link-color, 10%);
+    color: @link-text;
+  }
+
+  &.selected {
+    background-color: lighten(@link-color, 10%);
+    color: @link-text;
+  }
+}
+
+.toggle-view {
+  margin-top: 1rem;
+  text-align: right;
+}

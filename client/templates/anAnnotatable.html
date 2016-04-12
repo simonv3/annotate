@@ -4,6 +4,7 @@
 <div class="canvas"
   ng-class="{'can-annotate': canAnnotate}">
   <div ng-repeat="annotation in annotations"
+    ng-if="showAnnotations"
     an-annotation="annotation"
     annotation-opened="annotationOpened(annotationId)"
     an-index="$index">
