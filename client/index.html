@@ -70,7 +70,9 @@
 
     <header>
       <div class="image-meta">
-        {{ image.metadata.order + 1 }}.
+        <span class="order" ng-if="image.metadata.order !== undefined">
+          {{ image.metadata.order + 1 }}.
+        </span>
         <span href="#"
           editable-text="image.metadata.description"
           e-form="descriptionEditForm"
@@ -95,7 +97,8 @@
       ></div>
     <footer>
       <span class="has-older" ng-show="image.metadata.previous">Has an older version.</span>
-      <span class="uploaded-by">Uploaded by <span ng-bind="user.services.sandstorm.preferredHandle">.</span>
+      <span class="uploaded-by" ng-if="image.metadata.owner !== undefined">Uploaded by <span ng-bind="image.metadata.owner.services.sandstorm.preferredHandle">.</span></span>
+      <div style="clear:both;"></div>
     </footer>
   </div>
 </div>

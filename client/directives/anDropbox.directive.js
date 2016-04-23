@@ -21,23 +21,40 @@ angular.module('annotate').directive('anDropbox',
                 {'sort': {'uploadedAt': -1}}
               ).fetch()
 
+              // Let's also check what the most recent
+              // highest ordering is, and add it to the end.
+
+              var highestOrder = Images.find(
+                {},
+                {'sort': {'metadata.order': -1}}
+              ).fetch()[0].metadata.order
+
               Images.insert(file, function(err, newFile) {
                 if (err) console.log('error insterting image', err);
 
+                let updateSetForNewFile = {
+                  'metadata.owner': Meteor.user(),
+                  'metadata.order': highestOrder + 1
+                }
+
                 if (existingImages.length > 0) {
                   existingImages.forEach(function(img) {
-                  Images.update({_id: img._id},
-                        {$set: {'metadata.newest': newFile._id}})
+                    Images.update({_id: img._id},
+                      {$set: {'metadata.newest': newFile._id}})
                   })
+
                   Images.update({_id: existingImages[0]._id},
                     {$set: {'metadata.next': newFile._id}})
-                  Images.update({_id: newFile._id},
-                    {$set: {
-                      'metadata.previous': existingImages[0]._id,
-                      'metadata.description': existingImages[0].metadata.description,
-                      'metadata.order': existingImages[0].metadata.order
-                    }})
+
+                  updateSetForNewFile['metadata.previous'] = existingImages[0]._id
+                  if (existingImages[0].metadata) {
+                    updateSetForNewFile['metadata.description'] = existingImages[0].metadata.description
+                    updateSetForNewFile['metadata.order'] = existingImages[0].metadata.order
+                  }
                 }
+
+                Images.update({_id: newFile._id},
+                    {$set: updateSetForNewFile})
 
                 $scope.$apply(function() {
                   $timeout(function() {
