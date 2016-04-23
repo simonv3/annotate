@@ -90,8 +90,8 @@
     </header>
     <div an-annotatable
       an-image="image"
-      show-annotations="view === 'single'"
-      can-annotate="!addingImages && view === 'single'"
+      show-annotations="true"
+      can-annotate="!addingImages"
       ></div>
     <footer>
       <span class="has-older" ng-show="image.metadata.previous">Has an older version.</span>
